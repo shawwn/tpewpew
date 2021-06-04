@@ -72,8 +72,8 @@ def setup_env_vars():
   os.environ['TPU_HOST_BOUNDS'] = accelerator_type_to_host_bounds[
       accelerator_type]
   os.environ['TPU_MESH_CONTROLLER_ADDRESS'] = worker_network_endpoints.split(
-      ',')[0].split(':')[2] + ':8476'
-  os.environ['TPU_MESH_CONTROLLER_PORT'] = '8476'
+      ',')[0].split(':')[2] + ':9476'
+  os.environ['TPU_MESH_CONTROLLER_PORT'] = '9476'
 
 
 def main(unused_args):
@@ -81,7 +81,7 @@ def main(unused_args):
   server_def = tensorflow_server_pb2.ServerDef(protocol='grpc')
   job_def = server_def.cluster.job.add()
   job_def.name = 'tpu_worker'
-  job_def.tasks[0] = 'localhost:8470'
+  job_def.tasks[0] = 'localhost:9470'
   server_def.job_name = 'tpu_worker'
   server_def.task_index = 0
 
